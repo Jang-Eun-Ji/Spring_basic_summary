@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.encore.basic.repository.MybatisMemberRepository">
+    <select id="findAll" resultType="com.encore.basic.domain.Member">
+        select * from member;
+    </select>
+    <select id="findById" resultType="com.encore.basic.domain.Member" parameterType="Integer">
+        select * from member where id=#{id};
+    </select>
+<!--    insert타입은 resultType을 쓸수 없어서 에러나고 데이터베이스에 못넣어유 - 멤버클래스에 찾아서 매핑시켜라 라는 의미임-->
+<!--    <insert id="save">-->
+<!--        insert into member(name, email, password, created_time) values(#{name}, #{email}, #{password}, #{create_time});-->
+<!--    </insert>-->
+    <select id="save" resultType="com.encore.basic.domain.Member">
+<!--      insert into member(DB의 변수명) values(자바 변수명)  -->
+        insert into member(name, email, password, created_time) values(#{name}, #{email}, #{password}, #{create_time});
+    </select>
+
+</mapper>
+
+<!--sql의 입력문을 넣은 파일임-->

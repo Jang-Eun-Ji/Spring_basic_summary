@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>member_details</title>
+    <style>
+        #update-form{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="member/header :: headerFragment"></div>
+<table>
+    <tr>
+<!--        controller 의 model의 변수랑 맞추기-->
+        이름<td th:text="${memberResDto.name}"></td>
+        이메일<td th:text="${memberResDto.email}"></td>
+        비번<td th:text="${memberResDto.password}"></td>
+        가입일시<td th:text="${memberResDto.create_time}"></td>
+    </tr>
+</table>
+<button onclick="showUpdateForm()">수정</button>
+<a th:href="@{/member/delete(id=${memberResDto.id})}"><button>삭제</button></a>
+<div id="update-form">
+<!-- 이 데이터 폼으로 묶어서 post로 보내지는거임  -->
+    <form action="/members/update" method="POST">
+        <p>id: <input name="id" type="text" id="id" th:value="${memberResDto.id}" readonly></p>
+        <p>이름: <input name="name" type="text" id="name" th:value="${memberResDto.name}"></p>
+        <p>이메일: <input name="email" type="text" id="email" th:value="${memberResDto.email}" readonly></p>
+        <p>비번: <input name="password" type="password" id="password" th:value="${memberResDto.password}"></p>
+        <p><input type="submit" value="수정완료"> </p>
+    </form>
+</div>
+<script>
+    function showUpdateForm(){
+        document.getElementById('update-form').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
